@@ -2,14 +2,13 @@ from page.store_page import StorePage
 import logging
 
 
-# Configure logging
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
 def test_search_and_add_to_cart(driver):
-    """Test to search for a product and add it to cart successfully"""
-    # Store driver reference for screenshot capture on failure
+
     test_search_and_add_to_cart._driver = driver
 
     logger.info("Starting test: Search and Add to Cart")

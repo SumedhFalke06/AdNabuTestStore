@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class StorePage:
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 20)  # Increased timeout for slow page loads
+        self.wait = WebDriverWait(driver, 20)
 
     # locators
     PASSWORD_INPUT = (By.NAME, "password")
@@ -33,18 +33,18 @@ class StorePage:
         ).click()
 
     def search_product(self, product_name):
-        # still performs a search step
+
         self.driver.get(
             f"https://adnabu-store-assignment1.myshopify.com/search?q={product_name}"
         )
 
-        # open a stable known product after search
+
         self.driver.get(
             "https://adnabu-store-assignment1.myshopify.com/products/the-complete-snowboard"
         )
 
     def open_first_product(self):
-        # product already opened inside search_product
+
         pass
 
     def add_to_cart(self):
@@ -52,20 +52,20 @@ class StorePage:
         add_to_cart_btn = self.wait.until(
             EC.element_to_be_clickable(self.ADD_TO_CART)
         )
-        # Scroll into view and click
+
         self.driver.execute_script("arguments[0].scrollIntoView(true);", add_to_cart_btn)
         add_to_cart_btn.click()
 
     def is_product_added(self):
-        # Wait for cart confirmation to appear (max 10 seconds)
+
         try:
-            # Check for cart text patterns using explicit wait
+
             confirmation = self.wait.until(
                 EC.visibility_of_element_located(self.CART_TEXT)
             )
             return confirmation.is_displayed()
         except:
-            # Fallback: Use JavaScript to verify product in cart
+
             result = self.driver.execute_script("""
                 const pageText = document.body.innerText.toLowerCase();
                 
